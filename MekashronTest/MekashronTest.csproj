@@ -63,9 +63,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="DB-PORTAL_1.rar" />
-    <Content Include="NET_test.doc" />
-    <Content Include="smart-hd_1.rar" />
+    <Content Include="Task\DB-PORTAL_1.rar" />
+    <Content Include="Task\NET_test.doc" />
+    <Content Include="Task\smart-hd_1.rar" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
