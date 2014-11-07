@@ -91,7 +91,7 @@
 		    <div class="register">
 			    <div class="form without">
 				    <%--<form id="form4" runat="server">--%>
-					    <input class="orange_button" type="button" value="Создать аккаунт" />
+					    <input class="orange_button" type="submit" value="Создать аккаунт" />
 				    <%--</form>--%>
 			    </div>
 		    </div>

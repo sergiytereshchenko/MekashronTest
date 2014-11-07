@@ -35,7 +35,7 @@
 			<div class="form">
 				<form id="form1" runat="server">
 					<span>E-mail:</span>
-					<input required class="field" type="text" />
+			 		<input required class="field" type="text" />
 					<p>На вашу электронную почту будет  выслана ссылка для подтверждения регистрации.</p>
 					<br/>
 					<span>Имя и Фамилия:</span>
@@ -58,7 +58,7 @@
 					<p>Выберите страну в которой вы проживаете.</p>
 					<br/>
 					<br/>
-					<input class="orange_button" type="button" value="Продолжить регистрацию" />
+					<input class="orange_button" type="submit" value="Продолжить регистрацию" />
 				</form>
 			</div>
 		</div>

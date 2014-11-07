@@ -40,7 +40,7 @@
 					<br/>
 					<br/>
 					<br/>
-					<input class="orange_button" type="button" value="Выслать новый пароль" />
+					<input class="orange_button" type="submit" value="Выслать новый пароль" />
 				</form>
 			</div>
 		</div>

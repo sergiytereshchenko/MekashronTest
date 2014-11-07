@@ -11,7 +11,10 @@ namespace MekashronTest
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (IsPostBack)
+            {
+                Response.Redirect("register_step_2.aspx");
+            }
         }
     }
 }

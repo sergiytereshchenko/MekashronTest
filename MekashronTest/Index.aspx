@@ -48,10 +48,10 @@
 						<input required type="checkbox" value="1" id="checkboxInput" name="" />
 						<label for="checkboxInput"></label>
 						<span>Запомнить меня</span>
-						<a href="forgot_password.html">Забыли пароль?</a>
+						<a href="forgot_password.aspx">Забыли пароль?</a>
 				</div>
 			
-				<input class="button" type="button" value="Войти" />
+				<input class="button" type="submit" value="Войти" />
 			</form>
 			
 		</div>
@@ -61,7 +61,7 @@
 			<li class="red">Бесплатный просмотр<br/><p>Зарегистрируйтесь сейчас и попробуйте наши услуги БЕСПЛАТНО</p></li>
 			<li>40 лучших ТВ-каналов<br/><p>Смотрите лучшие Российские, Израильские, Украинские и другие ТВ-каналы</p></li>
 			<li>Тысячи фильмов<br/><p>Cмотрите новейшие VOD фильмы в HD и 3D качестве</p></li>
-			<a class="orange_button" href="register_step_1.html">Быстрая регистрация</a>
+			<a class="orange_button" href="register_step_1.aspx">Быстрая регистрация</a>
 		</ul>
 		
 		
