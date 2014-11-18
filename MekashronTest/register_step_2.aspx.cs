@@ -11,6 +11,26 @@ namespace MekashronTest
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            LabelEmail.Text = RegUser.eMail;
+
+            if (IsPostBack)
+            {
+                RegUser.Password = Request.Form["txtPassword1"];
+                RegUser.Address = Request.Form["txtAddress"];
+                RegUser.City = Request.Form["txtCity"];
+                RegUser.ZIP = Request.Form["txtZip"];
+                RegUser.Country = Request.Form["selCountry"];
+
+                DAL.DAL dl = new DAL.DAL();
+                List<string> errList = new List<string>();
+                dl.InsertUser(errList);
+
+                foreach (string s in errList)
+                {
+                    Response.Write(s);
+                }
+
+            }
 
         }
     }

@@ -33,32 +33,33 @@
 		
 		<div class="register">
 			<div class="form">
-				<form id="form1" runat="server">
+				<form id="form1" runat="server" method="post">
 					<span>E-mail:</span>
-			 		<input required class="field" type="text" />
+			 		<input id="txtEmail" required class="field" type="text" runat="server" />
 					<p>На вашу электронную почту будет  выслана ссылка для подтверждения регистрации.</p>
 					<br/>
 					<span>Имя и Фамилия:</span>
-					<input required class="field" type="text" />
+					<input id="txtFirstLastname" required class="field" type="text" runat="server" />
 					<p>Введите пожалуйста ваше действительное Имя и Фамилию.</p>
 					<br/>
 					<span>Телефон:</span>
-					<input required class="field" type="text" />
+					<input id="txtPhone" required class="field" type="text" runat="server" />
 					<p>Укажите ваш действующий номер телефона.</p>
 					<br/>
-					<span>Страна:</span>
+<%--					<span>Страна:</span>
 					<div class="select">
-						<select required="">
+						<select id="selCountry" required="" runat="server">
 							<option>---</option>
 							<option>Israel</option>
 							<option>Ukraine</option>
 							<option>USA</option>
 						</select>
 					</div>
-					<p>Выберите страну в которой вы проживаете.</p>
+					<p>Выберите страну в которой вы проживаете.</p>--%>
 					<br/>
 					<br/>
-					<input class="orange_button" type="submit" value="Продолжить регистрацию" />
+					<%--<input id="btnSubmitReg1" class="orange_button" type="submit" value="Продолжить регистрацию" runat="server"/>--%>
+                    <asp:Button ID="btnReg1" runat="server" CssClass="orange_button" Text="Продолжить регистрацию"/>
 				</form>
 			</div>
 		</div>

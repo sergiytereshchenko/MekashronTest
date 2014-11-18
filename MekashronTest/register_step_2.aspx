@@ -32,15 +32,15 @@
 		    <div class="register">
 			    <div class="form">
 				    <%--<form id="form1" runat="server">--%>
-					    <span>kdfk@ukr.net</span>
-					    <p>Данный E-mail будет использоваться для авторизации.</p>
+					    <span><asp:Label ID="LabelEmail" runat="server" Text=""></asp:Label></span>
+					    &nbsp;<p>Данный E-mail будет использоваться для авторизации.</p>
 					    <br/>
 					    <span>Пароль:</span>
-					    <input required class="field" type="password" />
+					    <input id="txtPassword1" required class="field" type="password" runat="server"/>
 					    <p>Введите пароль для защиты вашего аккаунта.</p>
 					    <br/>
 					    <span>Подтвердите пароль:</span>
-					    <input required class="field" type="password" />
+					    <input id="txtPassword2" required class="field" type="password" runat="server"/>
 					    <p>Подтввердите ваш пароль.</p>
 				    <%--</form>--%>
 			    </div>
@@ -51,20 +51,20 @@
 			    <div class="form">
 				    <%--<form id="form2" runat="server">--%>
 					    <span>Адрес:</span>
-					    <input required class="field" type="text" />
+					    <input id="txtAddress"  required class="field" type="text" runat="server"/>
 					    <p>Укажите ваш действительный адрес.</p>
 					    <br/>
 					    <span>Город:</span>
-					    <input required class="field" type="text" />
+					    <input id="txtCity"  required class="field" type="text" runat="server"/>
 					    <p>Город в котором вы проживаете.</p>
 					    <br/>
 					    <span>Почтовый индекс:</span>
-					    <input required class="field" type="text" />
+					    <input id="txtZip" required class="field" type="text" runat="server"/>
 					    <p>Ваш почтовый индекс.</p>
 					    <br/>
 					    <span>Страна:</span>
 					    <div class="select">
-						    <select required="">
+						    <select id="selCountry" required="" runat="server">
 							    <option>---</option>
 							    <option>Israel</option>
 							    <option>Ukraine</option>
@@ -81,7 +81,7 @@
 			    <div class="form without">
 				    <%--<form id="form3" runat="server">--%>
 					    <span>Промо-код:</span>
-					    <input required class="field" type="text" />
+					    <input id="txtPromo" required class="field" type="text" runat="server"/>
 					    <p>Заполните данное поле, если у вас есть промо-код.</p>
 				    <%--</form>--%>
 			    </div>
@@ -91,7 +91,8 @@
 		    <div class="register">
 			    <div class="form without">
 				    <%--<form id="form4" runat="server">--%>
-					    <input class="orange_button" type="submit" value="Создать аккаунт" />
+					    <%--<input class="orange_button" type="submit" value="Создать аккаунт" />--%>
+                        <asp:Button ID="btnReg2" runat="server" CssClass="orange_button" Text="Создать аккаунт"/>
 				    <%--</form>--%>
 			    </div>
 		    </div>

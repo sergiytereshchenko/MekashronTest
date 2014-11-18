@@ -125,6 +125,7 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DAL\DAL.cs" />
     <Compile Include="DBModel\actionfire.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
@@ -379,6 +380,7 @@
     <Compile Include="register_step_2.aspx.designer.cs">
       <DependentUpon>register_step_2.aspx</DependentUpon>
     </Compile>
+    <Compile Include="RegUser.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Task\DB-PORTAL_1.rar" />
