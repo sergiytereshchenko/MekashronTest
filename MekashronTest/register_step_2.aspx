@@ -11,6 +11,13 @@
 </head>
 <body>
     
+	<div id="errorDiv" Visible="False" class="centred" runat="server">
+		<div class="error_message">
+		    <p id="errorMsg" runat="server"></p>
+		</div>
+	</div>
+
+    
  <div class="top_line">
 		<div class="centred">
 			<a class="logo" href="index.html"></a>

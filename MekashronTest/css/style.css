@@ -420,6 +420,30 @@ span.required {
 	text-decoration: underline;
 	}
 
+/**********ERROR MESSAGE****************/
+
+.centred .error_message {
+	width: 900px;
+	background: #ffcccc url('../images/e.png') 9px 12px no-repeat;
+	margin: 10px auto;
+	padding: 10px 0;
+	border: 1px solid #cc3300;
+	border-radius: 5px; /* CSS3 */
+	-moz-border-radius: 5px; /* Firefox */
+	-webkit-border-radius: 5px; /* Safari, Chrome */
+	-khtml-border-radius: 5px; /* KHTML */
+	}
+
+.centred .error_message p{
+	margin: 0px 10px 0px 30px;
+	color: #345500;
+	font-size: 13px;
+	}
+	
+.centred .error_message a{
+	text-decoration: underline;
+	}
+
 	
 /***********REGISTER*************/
 

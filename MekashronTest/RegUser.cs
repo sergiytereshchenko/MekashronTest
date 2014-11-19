@@ -27,6 +27,8 @@ namespace MekashronTest
 
         public static string promo { get; set; }
 
+        public static bool successfullyRegistered { get; set; }
+
         public static void Clear()
         {
             eMail = "";

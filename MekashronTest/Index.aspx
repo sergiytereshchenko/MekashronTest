@@ -11,7 +11,7 @@
 </head>
 <body>
     
-	<div class="centred">
+	<div id="successReg" Visible="False" class="centred" runat="server">
 		<div class="email_verification">
 			<p>Регистрация успешно завершена! Добро пожаловать в Smart-HD. - <strong>Необходимо подтверждение E-mail адреса.</strong></p>
 			<p>
@@ -39,11 +39,11 @@
 			<h1>Вход в личный кабинет</h1>
 			<form id="form1" runat="server">
 				<span>E-mail:</span>
-				<input required class="fields" type="text" />
+				<input id="txtEmail" required class="fields" type="text" runat="server" />
 				<br/>
 				<br/>
 				<span>Пароль:</span>
-				<input required class="fields" type="password" />
+				<input id="txtPassword"  required class="fields" type="password" runat="server" />
 				<div class="checkbox">
 						<input required type="checkbox" value="1" id="checkboxInput" name="" />
 						<label for="checkboxInput"></label>

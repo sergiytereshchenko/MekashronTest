@@ -42,9 +42,11 @@
       <HintPath>packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Activities" />
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -63,6 +65,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Cabinet.aspx" />
     <Content Include="css\style.css" />
     <Content Include="forgot_password.aspx" />
     <Content Include="images\acc.png" />
@@ -72,6 +75,7 @@
     <Content Include="images\cart.png" />
     <Content Include="images\cc.png" />
     <Content Include="images\discover.png" />
+    <Content Include="images\e.png" />
     <Content Include="images\edit.png" />
     <Content Include="images\en.png" />
     <Content Include="images\facebook.png" />
@@ -120,11 +124,19 @@
     <Content Include="images\visa.png" />
     <Content Include="images\watch_tv_button.png" />
     <Content Include="index.aspx" />
+    <Content Include="MyAccount.aspx" />
     <Content Include="register_step_1.aspx" />
     <Content Include="register_step_2.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Cabinet.aspx.cs">
+      <DependentUpon>Cabinet.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Cabinet.aspx.designer.cs">
+      <DependentUpon>Cabinet.aspx</DependentUpon>
+    </Compile>
     <Compile Include="DAL\DAL.cs" />
     <Compile Include="DBModel\actionfire.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
@@ -364,6 +376,13 @@
     </Compile>
     <Compile Include="index.aspx.designer.cs">
       <DependentUpon>index.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MyAccount.aspx.cs">
+      <DependentUpon>MyAccount.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MyAccount.aspx.designer.cs">
+      <DependentUpon>MyAccount.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="register_step_1.aspx.cs">

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -21,14 +22,27 @@ namespace MekashronTest
                 RegUser.ZIP = Request.Form["txtZip"];
                 RegUser.Country = Request.Form["selCountry"];
 
-                DAL.DAL dl = new DAL.DAL();
+                //DAL.DAL dl = new DAL.DAL();
                 List<string> errList = new List<string>();
-                dl.InsertUser(errList);
+                DAL.DAL.CommonDal.InsertUser(errList);
 
-                foreach (string s in errList)
+                if (errList.Count==0)
                 {
-                    Response.Write(s);
+                    RegUser.successfullyRegistered = true;
+                    Response.Redirect("index.aspx");
                 }
+                else
+                {
+                    StringBuilder errors = new StringBuilder();
+                    foreach (string s in errList)
+                    {
+                        errors.Append(s + "<br/>");
+                    }
+                    errors.Remove(errors.Length - 5, 5);
+                    errorDiv.Visible = true;
+                    errorMsg.InnerHtml = errors.ToString();
+                }
+
 
             }
 
