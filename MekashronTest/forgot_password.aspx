@@ -12,9 +12,16 @@
 </head>
 
 <body>
-<div class="top_line">
+    
+    <div id="errorDiv" Visible="False" class="centred" runat="server">
+        <div class="error_message">
+            <p id="errorMsg" runat="server"></p>
+        </div>
+    </div>
+
+    <div class="top_line">
 		<div class="centred">
-			<a class="logo" href="index.html"></a>
+			<a class="logo" href="index.aspx"></a>
 			<a class="fb" target="_blank" href="http://facebook.com"></a>
 			<ul>
 				<li class="ru"><a href="#">Русский</a></li>
@@ -35,12 +42,16 @@
 					<p class="forgot">Для того, чтобы получить новый пароль, введите Ваш e-mail и мы отправим Вам письмо с инструкцией.</p>
 					<br/>
 					<span>E-mail:</span>
-					<input required class="field" type="text" />
+					<input id="txtEmail" class="field" type="text" runat="server" controltovalidate="txtEmail" />
 					
 					<br/>
+					<asp:RequiredFieldValidator ID="RequiredFieldValidatorEmail" runat="server" ErrorMessage="Please, input e-mail" Display="None" ControlToValidate="txtEmail"></asp:RequiredFieldValidator>
+                    <asp:RegularExpressionValidator ID="RegularExpressionValidatorEmail" runat="server" ErrorMessage="Please, input proper e-mail" ControlToValidate="txtEmail" Display="None" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"></asp:RegularExpressionValidator>
 					<br/>
 					<br/>
-					<input class="orange_button" type="submit" value="Выслать новый пароль" />
+                    <asp:Button CssClass="orange_button" ID="btnSendEmail" runat="server" Text="Выслать новый пароль" OnClick="btnSendEmail_Click" />
+                    <asp:ValidationSummary ID="ValidationSummaryForgotPassword" runat="server" />
+					<%--<input class="orange_button" type="submit" value="Выслать новый пароль" />--%>
 				</form>
 			</div>
 		</div>

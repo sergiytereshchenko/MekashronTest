@@ -566,7 +566,9 @@ span.required {
 	font-size: 14px;
 	font-weight: bold;
 	text-align: center;
-	}	
+    top: 0px;
+    left: 1px;
+}	
 	
 .centred .register .form input.orange_button:hover {	
 	background: #ffaf24;

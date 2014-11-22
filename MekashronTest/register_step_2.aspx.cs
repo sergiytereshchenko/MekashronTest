@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mail;
 using System.Text;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using MekashronTest.Helpers;
 
 namespace MekashronTest
 {
@@ -23,26 +25,43 @@ namespace MekashronTest
                 RegUser.Country = Request.Form["selCountry"];
 
                 //DAL.DAL dl = new DAL.DAL();
-                List<string> errList = new List<string>();
-                DAL.DAL.CommonDal.InsertUser(errList);
+                ErrorList errors = new ErrorList();
 
-                if (errList.Count==0)
+                DAL.DAL.CommonDal.InsertUser(errors);
+
+                if (errors.isEmpty())
                 {
                     RegUser.successfullyRegistered = true;
-                    Response.Redirect("index.aspx");
+
+                    try
+                    {
+                        using (MailMessage newMessage = new MailMessage())
+                        {
+                            newMessage.From = new MailAddress("sertest99@gmail.com");
+                            newMessage.To.Add(new MailAddress(RegUser.eMail));
+                            newMessage.Subject = "Mekashron account activation";
+                            newMessage.Body = String.Format("For activating please click on this link http://localhost:63710/activate.aspx?email={0}", RegUser.eMail);
+                            SendEmail.Send(newMessage, errors);
+                        }
+
+                    }
+                    catch (Exception ex)
+                    {
+                        errors.Add(ex.Message);
+                    }
+                    
+                }
+
+                if (!errors.isEmpty())
+                {
+                    errorDiv.Visible = true;
+                    errorMsg.InnerHtml = errors.ToHTML();
+                    
                 }
                 else
                 {
-                    StringBuilder errors = new StringBuilder();
-                    foreach (string s in errList)
-                    {
-                        errors.Append(s + "<br/>");
-                    }
-                    errors.Remove(errors.Length - 5, 5);
-                    errorDiv.Visible = true;
-                    errorMsg.InnerHtml = errors.ToString();
+                    Response.Redirect("index.aspx");
                 }
-
 
             }
 

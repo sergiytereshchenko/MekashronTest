@@ -15,7 +15,7 @@
     
 	<div class="top_line">
 		<div class="centred">
-			<a class="logo" href="index.html"></a>
+			<a class="logo" href="index.aspx"></a>
 			<a class="fb" target="_blank" href="http://facebook.com"></a>
 			<ul>
 				<li class="ru"><a href="#">Русский</a></li>

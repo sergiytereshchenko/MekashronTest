@@ -65,6 +65,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="activate.aspx" />
     <Content Include="Cabinet.aspx" />
     <Content Include="css\style.css" />
     <Content Include="forgot_password.aspx" />
@@ -130,6 +131,13 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="activate.aspx.cs">
+      <DependentUpon>activate.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="activate.aspx.designer.cs">
+      <DependentUpon>activate.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Cabinet.aspx.cs">
       <DependentUpon>Cabinet.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -370,6 +378,8 @@
     <Compile Include="forgot_password.aspx.designer.cs">
       <DependentUpon>forgot_password.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\ErrorList.cs" />
+    <Compile Include="Helpers\SendEmail.cs" />
     <Compile Include="index.aspx.cs">
       <DependentUpon>index.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using MekashronTest.DBModel;
 using System.Transactions;
+using MekashronTest.Helpers;
 
 namespace MekashronTest.DAL
 {
@@ -48,7 +49,7 @@ namespace MekashronTest.DAL
         }
 
 
-        public bool InsertUser(List<string> errors)
+        public bool InsertUser(ErrorList errors)
         {
             bool result = true;
 
@@ -125,7 +126,7 @@ namespace MekashronTest.DAL
             return result;
         }
 
-        public bool CheckCredentials(string inEMail, string inPassword, List<string> errors)
+        public bool CheckCredentials(string inEMail, string inPassword, ErrorList errors)
         {
             bool result = false;
 
@@ -135,16 +136,25 @@ namespace MekashronTest.DAL
                 {
                     byte[] inEmailByteArray = ConvertStringToByte(inEMail);
 
-                    var query = me.users.Where(a => a.Email.Equals(inEmailByteArray)).Single();
-
-                    if (ConvertByteArrayToString(query.password) == inPassword)
+                    var query = me.users.Where(a => a.Email.Equals(inEmailByteArray));
+                    if (query.Count()>0)
                     {
-                        result = true;
+                        var firstRecord = query.First();
+                        if (ConvertByteArrayToString(firstRecord.password) == inPassword)
+                        {
+                            result = true;
+                        }
+                        else
+                        {
+                            errors.Add("Password is wrong!");
+                        }
+                        
                     }
                     else
                     {
-                        errors.Add("Password is wrong!");
+                        errors.Add("E-mail is wrong!");
                     }
+
 
                 }
                 catch (Exception ex)

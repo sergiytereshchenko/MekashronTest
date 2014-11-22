@@ -15,7 +15,7 @@
     
 	<div class="top_line">
 		<div class="centred">
-			<a class="logo" href="index.html"></a>
+			<a class="logo" href="index.aspx"></a>
 			<a class="fb" target="_blank" href="http://facebook.com"></a>
 			<ul>
 				<li class="ru"><a href="#">Русский</a></li>
@@ -35,15 +35,15 @@
 			<div class="form">
 				<form id="form1" runat="server" method="post">
 					<span>E-mail:</span>
-			 		<input id="txtEmail" required class="field" type="text" runat="server" />
+			 		<input id="txtEmail" class="field" type="text" runat="server" />
 					<p>На вашу электронную почту будет  выслана ссылка для подтверждения регистрации.</p>
 					<br/>
 					<span>Имя и Фамилия:</span>
-					<input id="txtFirstLastname" required class="field" type="text" runat="server" />
+					<input id="txtFirstLastname" class="field" type="text" runat="server" />
 					<p>Введите пожалуйста ваше действительное Имя и Фамилию.</p>
 					<br/>
 					<span>Телефон:</span>
-					<input id="txtPhone" required class="field" type="text" runat="server" />
+					<input id="txtPhone" class="field" type="text" runat="server" />
 					<p>Укажите ваш действующий номер телефона.</p>
 					<br/>
 <%--					<span>Страна:</span>
@@ -60,6 +60,19 @@
 					<br/>
 					<%--<input id="btnSubmitReg1" class="orange_button" type="submit" value="Продолжить регистрацию" runat="server"/>--%>
                     <asp:Button ID="btnReg1" runat="server" CssClass="orange_button" Text="Продолжить регистрацию"/>
+                    
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidatorEmail" runat="server" ControlToValidate="txtEmail" Display="None" ErrorMessage="Please, enter e-mail"></asp:RequiredFieldValidator>
+                    <asp:RegularExpressionValidator ID="RegularExpressionValidatorEmail" runat="server" ControlToValidate="txtEmail" Display="None" ErrorMessage="Please, enter e-mail" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"></asp:RegularExpressionValidator>
+                
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidatorFirstLastname" runat="server" ControlToValidate="txtFirstLastname" ErrorMessage="Please, enter Name" Display="None"></asp:RequiredFieldValidator>
+
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidatorPhone" runat="server" ControlToValidate="txtPhone" ErrorMessage="Please, enter phone" Display="None"></asp:RequiredFieldValidator>
+
+	                <div Visible="True" class="centred" runat="server">
+	                    <asp:ValidationSummary ID="ValidationSummaryReg1" runat="server" BorderStyle="Solid" BackColor="#FFCCCC" BorderColor="#CC3300" BorderWidth="1px" DisplayMode="List" style="top: 0px; left: 0px; width: 414px" />
+	                </div>
+                    
+
 				</form>
 			</div>
 		</div>

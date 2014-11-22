@@ -23,9 +23,16 @@
                     </p>
 		</div>
 	</div>
+
+    <div id="errorDiv" visible="False" class="centred" runat="server">
+        <div class="error_message">
+            <p id="errorMsg" runat="server"></p>
+        </div>
+    </div>
+
 	<div class="top_line">
 		<div class="centred">
-			<a class="logo" href="index.html"></a>
+			<a class="logo" href="index.aspx"></a>
 			<a class="fb" target="_blank" href="http://facebook.com"></a>
 			<ul>
 				<li class="ru"><a href="#">Русский</a></li>
@@ -39,19 +46,29 @@
 			<h1>Вход в личный кабинет</h1>
 			<form id="form1" runat="server">
 				<span>E-mail:</span>
-				<input id="txtEmail" required class="fields" type="text" runat="server" />
+				<input id="txtEmail" class="fields" type="text" runat="server" />
 				<br/>
 				<br/>
 				<span>Пароль:</span>
-				<input id="txtPassword"  required class="fields" type="password" runat="server" />
+				<input id="txtPassword" class="fields" type="password" runat="server" />
 				<div class="checkbox">
-						<input required type="checkbox" value="1" id="checkboxInput" name="" />
-						<label for="checkboxInput"></label>
+                       <%-- <asp:CheckBox ID="CheckBox1" runat="server" />--%>
+						<input type="checkbox" value="1" id="chkRememberMe" name="" runat="server" />
+						<label for="chkRememberMe"></label>
 						<span>Запомнить меня</span>
 						<a href="forgot_password.aspx">Забыли пароль?</a>
 				</div>
 			
-				<input class="button" type="submit" value="Войти" />
+				<input class="button" type="submit" value="Войти" runat="server"/>
+                <asp:RequiredFieldValidator ID="RequiredFieldValidatorEmail" runat="server" ControlToValidate="txtEmail" Display="None" ErrorMessage="Please, enter e-mail"></asp:RequiredFieldValidator>
+                <asp:RegularExpressionValidator ID="RegularExpressionValidatorEmail" runat="server" ControlToValidate="txtEmail" Display="None" ErrorMessage="Please, enter e-mail" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"></asp:RegularExpressionValidator>
+                
+                <asp:RequiredFieldValidator ID="RequiredFieldValidatorPassword" runat="server" ControlToValidate="txtPassword" ErrorMessage="Please, enter password" Display="None"></asp:RequiredFieldValidator>
+
+	            <div Visible="True" class="centred" runat="server">
+	                <asp:ValidationSummary ID="ValidationSummaryIndex" runat="server" BorderStyle="Solid" BackColor="#FFCCCC" BorderColor="#CC3300" BorderWidth="1px" DisplayMode="List" style="top: 0px; left: 0px; width: 414px" />
+	            </div>
+
 			</form>
 			
 		</div>
@@ -92,5 +109,6 @@
     
     </div>
     </form>--%>
+    
 </body>
 </html>
