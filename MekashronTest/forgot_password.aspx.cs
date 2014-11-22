@@ -34,23 +34,44 @@ namespace MekashronTest
         protected void btnSendEmail_Click(object sender, EventArgs e)
         {
             ErrorList errors = new ErrorList();
-            try
-            {
-                using (MailMessage newMessage = new MailMessage())
-                {
-                    newMessage.From = new MailAddress("sertest99@gmail.com");
-                    newMessage.To.Add(new MailAddress(txtEmail.Value));
-                    newMessage.Subject = "Mekashron new password";
-                    newMessage.Body = String.Format("Your new password is {0}", CreateRandomPassword(8));
-                    SendEmail.Send(newMessage, errors);
+            string inEmail = txtEmail.Value;
+            bool reschange = false;
+
+            if (!String.IsNullOrEmpty(inEmail))
+	        {
+		        try
+		        {
+		            bool rescheck = DAL.DAL.CommonDal.IsEmailAlreadyInDB(inEmail);
+		            if (rescheck)
+		            {
+		                string newPassword = CreateRandomPassword(8);
+                        reschange = DAL.DAL.CommonDal.ChangePassword(inEmail, newPassword, errors);
+
+                        using (MailMessage newMessage = new MailMessage())
+                        {
+                            newMessage.From = new MailAddress("sertest99@gmail.com");
+                            newMessage.To.Add(new MailAddress(txtEmail.Value));
+                            newMessage.Subject = "Mekashron new password";
+                            newMessage.Body = String.Format("Your new password is {0}", newPassword);
+                            SendEmail.Send(newMessage, errors);
+                        }
+		                
+		            }
+		            else
+		            {
+		                errors.Add("Wrong e-mail!");
+		            }
                 }
-                
-            }
-            catch (Exception ex)
+                catch (Exception ex)
+                {
+                    errors.Add(ex.Message);
+                }
+	        }
+            else
             {
-                errors.Add(ex.Message);
-            }
-        
+                errors.Add("Please, enter e-mail");
+            }     
+   
             //Add errors displaing
             if (!errors.isEmpty())
             {

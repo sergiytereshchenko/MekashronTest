@@ -31,7 +31,7 @@ namespace MekashronTest
 
                 if (errors.isEmpty())
                 {
-                    RegUser.successfullyRegistered = true;
+                    RegUser.NotActivated = true;
 
                     try
                     {

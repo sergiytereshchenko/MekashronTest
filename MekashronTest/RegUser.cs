@@ -27,7 +27,7 @@ namespace MekashronTest
 
         public static string promo { get; set; }
 
-        public static bool successfullyRegistered { get; set; }
+        public static bool NotActivated { get; set; }
 
         public static void Clear()
         {
@@ -40,6 +40,7 @@ namespace MekashronTest
             Address = "";
             City = "";
             ZIP = "";
+            NotActivated = false;
             promo = "";
 
         }

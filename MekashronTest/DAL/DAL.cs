@@ -8,6 +8,14 @@ using MekashronTest.Helpers;
 
 namespace MekashronTest.DAL
 {
+    public enum CheckResults
+    {
+        AllRight,
+        NotActivated,
+        Error
+    }
+
+
     public class DAL
     {
         // public static DAL CommonDal = new DAL();
@@ -126,9 +134,9 @@ namespace MekashronTest.DAL
             return result;
         }
 
-        public bool CheckCredentials(string inEMail, string inPassword, ErrorList errors)
+        public CheckResults CheckCredentials(string inEMail, string inPassword, ErrorList errors)
         {
-            bool result = false;
+            CheckResults result = CheckResults.Error;
 
             using (mekashrontvEntities me = new mekashrontvEntities())
             {
@@ -137,18 +145,34 @@ namespace MekashronTest.DAL
                     byte[] inEmailByteArray = ConvertStringToByte(inEMail);
 
                     var query = me.users.Where(a => a.Email.Equals(inEmailByteArray));
-                    if (query.Count()>0)
+                    if (query.Any())
                     {
+                        //check password
                         var firstRecord = query.First();
                         if (ConvertByteArrayToString(firstRecord.password) == inPassword)
                         {
-                            result = true;
+                            result = CheckResults.AllRight;
+
+                            //check activation
+                            var querya = me.entities.Where(a => a.entityID == firstRecord.EntityID);
+                            if (querya.Any())
+                            {
+                                var firstRecorda = querya.First();
+                                if (firstRecorda.AllowEmail == 3)
+                                {
+                                    result = CheckResults.AllRight;
+                                }
+                                else
+                                {
+                                    result = CheckResults.NotActivated;
+                                    errors.Add("Account is not activated!");
+                                }
+                            }
                         }
                         else
                         {
                             errors.Add("Password is wrong!");
                         }
-                        
                     }
                     else
                     {
@@ -160,12 +184,86 @@ namespace MekashronTest.DAL
                 catch (Exception ex)
                 {
                     errors.Add(ex.Message);
-                    result = false;
+                    result = CheckResults.Error;
                 }
             }
 
             return result;
         }
+
+        public bool ActivateAcount(string inEMail, ErrorList errors)
+        {
+            bool result = false;
+
+            using (mekashrontvEntities me = new mekashrontvEntities())
+            {
+                try
+                {
+                    byte[] inEmailByteArray = ConvertStringToByte(inEMail);
+
+                    var query = me.users.Where(a => a.Email.Equals(inEmailByteArray));
+                    if (query.Any())
+                    {
+                        var firstRecord = query.First();
+                        //check activation
+                        var querya = me.entities.Where(a => a.entityID == firstRecord.EntityID);
+                        if (querya.Any())
+                        {
+                            var firstRecorda = querya.First();
+                            if (firstRecorda.AllowEmail != 3)
+                            {
+                                firstRecorda.AllowEmail=3;
+                                me.SaveChanges();
+                                result = true;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        errors.Add("E-mail is wrong!");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    errors.Add(ex.Message);
+                }
+            }
+
+            return result;
+        }
+
+        public bool ChangePassword(string inEMail, string inPassword, ErrorList errors)
+        {
+            bool result = false;
+
+            using (mekashrontvEntities me = new mekashrontvEntities())
+            {
+                try
+                {
+                    byte[] inEmailByteArray = ConvertStringToByte(inEMail);
+
+                    var query = me.users.Where(a => a.Email.Equals(inEmailByteArray));
+                    if (query.Any())
+                    {
+                        var firstRecord = query.First();
+                        firstRecord.password = ConvertStringToByte(inPassword);
+                        me.SaveChanges();
+                    }
+                    else
+                    {
+                        errors.Add("E-mail is wrong!");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    errors.Add(ex.Message);
+                }
+            }
+
+            return result;
+        }
+
+
 
         public bool IsEmailAlreadyInDB(string inEMail)
         {

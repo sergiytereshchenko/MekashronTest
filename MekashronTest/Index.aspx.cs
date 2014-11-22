@@ -15,11 +15,6 @@ namespace MekashronTest
             errorDiv.Visible = false;
             errorMsg.InnerHtml = "";
 
-            if (RegUser.successfullyRegistered)
-            {
-                successReg.Visible = true;
-            }
-
             if (IsPostBack)
             {
 
@@ -68,12 +63,27 @@ namespace MekashronTest
                 string inPassword = Request.Form["txtPassword"];
                 ErrorList errors = new ErrorList();
 
-                if (DAL.DAL.CommonDal.CheckCredentials(inEmail, inPassword, errors))
+                DAL.CheckResults checkresult = DAL.DAL.CommonDal.CheckCredentials(inEmail, inPassword, errors);
+
+                if (checkresult == DAL.CheckResults.AllRight || checkresult == DAL.CheckResults.NotActivated)
+                {
+                    RegUser.eMail = inEmail;
+                    RegUser.Password = inPassword;
+                }
+
+                if (checkresult == DAL.CheckResults.AllRight)
                 {
                     Response.Redirect("Cabinet.aspx");    
                 }
                 else
                 {
+                    if (checkresult == DAL.CheckResults.NotActivated)
+                    {
+                        strongEmail.InnerText = RegUser.eMail;
+                        lkEmail.Attributes["myCustomID"] = RegUser.eMail;
+                        RegUser.NotActivated = true;
+                        successReg.Visible = true;
+                    }
                     errorDiv.Visible = true;
                     errorMsg.InnerHtml = errors.ToHTML();
                    // Response.Redirect("index.aspx");
@@ -82,30 +92,45 @@ namespace MekashronTest
             }
             else
             {
-
                 if (Request.Cookies["eMail"] != null && Request.Cookies["Password"] != null)
                 {
                     string inEmail = Request.Cookies["eMail"].Value;
                     string inPassword = Request.Cookies["Password"].Value;
                     ErrorList errors = new ErrorList();
 
-                    if (DAL.DAL.CommonDal.CheckCredentials(inEmail, inPassword, errors))
+                    DAL.CheckResults checkresult = DAL.DAL.CommonDal.CheckCredentials(inEmail, inPassword, errors);
+
+                    if (checkresult == DAL.CheckResults.AllRight || checkresult == DAL.CheckResults.NotActivated)
+                    {
+                        RegUser.eMail = inEmail;
+                        RegUser.Password = inPassword;
+                    }
+
+                    if (checkresult == DAL.CheckResults.AllRight)
                     {
                         Response.Redirect("Cabinet.aspx");
                     }
                     else
                     {
+                        if (checkresult == DAL.CheckResults.NotActivated)
+                        {
+                            strongEmail.InnerText = RegUser.eMail;
+                            lkEmail.Attributes["myCustomID"] = RegUser.eMail;
+                            RegUser.NotActivated = true;
+                            successReg.Visible = true;
+                        }
                         errorDiv.Visible = true;
                         errorMsg.InnerHtml = errors.ToHTML();
                         // Response.Redirect("index.aspx");
                     }
-
                 }
-
-
-
-
             }
+
+            if (RegUser.NotActivated)
+            {
+                successReg.Visible = true;
+            }
+
         }
     }
 }
