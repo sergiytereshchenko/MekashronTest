@@ -84,9 +84,12 @@ namespace MekashronTest
                         RegUser.NotActivated = true;
                         successReg.Visible = true;
                     }
+                    else
+                    {
+                        successReg.Visible = false;
+                    }
                     errorDiv.Visible = true;
                     errorMsg.InnerHtml = errors.ToHTML();
-                   // Response.Redirect("index.aspx");
                 }
 
             }
@@ -119,16 +122,14 @@ namespace MekashronTest
                             RegUser.NotActivated = true;
                             successReg.Visible = true;
                         }
+                        else
+                        {
+                            successReg.Visible = false;
+                        }
                         errorDiv.Visible = true;
                         errorMsg.InnerHtml = errors.ToHTML();
-                        // Response.Redirect("index.aspx");
                     }
                 }
-            }
-
-            if (RegUser.NotActivated)
-            {
-                successReg.Visible = true;
             }
 
         }

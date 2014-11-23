@@ -25,28 +25,36 @@
 	</div>
 
 	<div class="centred">
+	    
+        
+
 <%--		<div class="steps">
 			<div class="step float_l" style="margin: 0 0 0 70px;">1</div>
 			<span class="float_l">Регистрация на Smart-HD</span>
 			<div class="step float_r" style="margin: 0 70px 0 0;">2</div>
 		</div>--%>
 		
-<%--		<div class="register">
+		<div class="register">
 			<div class="form">
 				<form id="form1" runat="server" method="post">
-					<span>E-mail:</span>
+				    <h1>Личный кабинет</h1>
+				    <br/>
+                    <br/>
+                    <br/>
+				    <asp:LinkButton ID="LinkButtonToAccount" runat="server" CssClass="orange_button" PostBackUrl="~/MyAccount.aspx">My account</asp:LinkButton>
+<%--					<span>E-mail:</span>
 			 		<input id="txtEmail" required class="field" type="text" runat="server" />
 					<p>На вашу электронную почту будет  выслана ссылка для подтверждения регистрации.</p>
 					<br/>
 					<span>Имя и Фамилия:</span>
 					<input id="txtFirstLastname" required class="field" type="text" runat="server" />
 					<p>Введите пожалуйста ваше действительное Имя и Фамилию.</p>
-					<br/>
+					
 					<span>Телефон:</span>
 					<input id="txtPhone" required class="field" type="text" runat="server" />
 					<p>Укажите ваш действующий номер телефона.</p>
 					<br/>
-<%--					<span>Страна:</span>
+					<span>Страна:</span>
 					<div class="select">
 						<select id="selCountry" required="" runat="server">
 							<option>---</option>
@@ -59,12 +67,12 @@
 					<br/>
 					<br/>
 					<input id="btnSubmitReg1" class="orange_button" type="submit" value="Продолжить регистрацию" runat="server"/>
-                    <asp:Button ID="btnReg1" runat="server" CssClass="orange_button" Text="Продолжить регистрацию"/>
+                    <asp:Button ID="btnReg1" runat="server" CssClass="orange_button" Text="Продолжить регистрацию"/>--%>
 				</form>
 			</div>
-		</div>--%>
+		</div>
 		
-		<h1>Личный кабинет</h1>
+		
 		
 		
 	</div>

@@ -382,7 +382,9 @@
       <DependentUpon>forgot_password.aspx</DependentUpon>
     </Compile>
     <Compile Include="Helpers\ErrorList.cs" />
+    <Compile Include="Helpers\HashPassword.cs" />
     <Compile Include="Helpers\SendEmail.cs" />
+    <Compile Include="Helpers\StringByteConverter.cs" />
     <Compile Include="index.aspx.cs">
       <DependentUpon>index.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
