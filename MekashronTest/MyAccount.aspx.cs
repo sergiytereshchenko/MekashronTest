@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using MekashronTest.DAL;
 using MekashronTest.DBModel;
 using MekashronTest.Helpers;
 
@@ -21,17 +22,18 @@ namespace MekashronTest
 
                 if (DAL.DAL.CommonDal.CheckCredentials(RegUser.eMail, RegUser.Password, errors)==DAL.CheckResults.AllRight)
                 {
-                    users curUser = DAL.DAL.CommonDal.GetUser(RegUser.eMail, errors);
+                    UserModel curUser = DAL.DAL.CommonDal.GetUser(RegUser.eMail, errors);
 
                     if (curUser!=null)
                     {
-                        txtEmail.Value = StringByteConverter.ConvertByteArrayToString(curUser.Email);
-                        //txtAddress.Value = StringByteConverter.ConvertByteArrayToString(curUser.);
-                        //txtEmail.Value = StringByteConverter.ConvertByteArrayToString(curUser.Email);
-                        //txtEmail.Value = StringByteConverter.ConvertByteArrayToString(curUser.Email);
-                        //txtEmail.Value = StringByteConverter.ConvertByteArrayToString(curUser.Email);
-                        //txtEmail.Value = StringByteConverter.ConvertByteArrayToString(curUser.Email);
-                        //txtEmail.Value = StringByteConverter.ConvertByteArrayToString(curUser.Email);
+                        txtEmail.Value = curUser.eMail;
+                        txtFirstLastname.Value = String.Format("{0} {1}", curUser.FirstName, curUser.LastName);
+                        txtPhone.Value = curUser.Phone;
+                        txtAddress.Value = curUser.Address;
+                        txtCity.Value = curUser.City;
+                        txtZip.Value = curUser.ZIP;
+                        selCountry.Value = curUser.Country;
+
 
                     }
 
@@ -40,6 +42,7 @@ namespace MekashronTest
                 {
                     errorDiv.Visible = true;
                     errorMsg.InnerHtml = errors.ToHTML();
+                    form2.Visible = false;
                 }
             }
             else

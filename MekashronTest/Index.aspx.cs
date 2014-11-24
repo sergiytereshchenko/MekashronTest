@@ -15,6 +15,11 @@ namespace MekashronTest
             errorDiv.Visible = false;
             errorMsg.InnerHtml = "";
 
+            if (RegUser.NotActivated)
+            {
+                successReg.Visible = true;
+            }
+
             if (IsPostBack)
             {
 

@@ -149,6 +149,7 @@
       <DependentUpon>Cabinet.aspx</DependentUpon>
     </Compile>
     <Compile Include="DAL\DAL.cs" />
+    <Compile Include="DAL\UserModel.cs" />
     <Compile Include="DBModel\actionfire.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>

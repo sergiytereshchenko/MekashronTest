@@ -42,13 +42,18 @@ namespace MekashronTest.DAL
             }
         }
 
-        public bool InsertUser(ErrorList errors)
+        public bool InsertUser(UserModel inUser, ErrorList errors)
         {
             bool result = true;
 
             //TO DO
-           
-            //3. Check format of email and other inputs
+           //3. Check format of email and other inputs
+
+            if (inUser == null)
+            {
+                errors.Add("User is empty!");
+                return false;
+            }
 
             mekashrontvEntities me = new mekashrontvEntities();
             bool success = false;
@@ -62,14 +67,14 @@ namespace MekashronTest.DAL
                     {
 
                         entities newUserEntity = new entities();
-                        newUserEntity.Email = StringByteConverter.ConvertStringToByte(RegUser.eMail);
-                        newUserEntity.FirstName = StringByteConverter.ConvertStringToByte(RegUser.FirstName);
-                        newUserEntity.LastName = StringByteConverter.ConvertStringToByte(RegUser.LastName);
-                        newUserEntity.Phone = StringByteConverter.ConvertStringToByte(RegUser.Phone);
-                        newUserEntity.Country = StringByteConverter.ConvertStringToByte(RegUser.Country);
-                        newUserEntity.Address = StringByteConverter.ConvertStringToByte(RegUser.Address);
-                        newUserEntity.City = StringByteConverter.ConvertStringToByte(RegUser.City);
-                        newUserEntity.Zip = StringByteConverter.ConvertStringToByte(RegUser.ZIP);
+                        newUserEntity.Email = StringByteConverter.ConvertStringToByte(inUser.eMail);
+                        newUserEntity.FirstName = StringByteConverter.ConvertStringToByte(inUser.FirstName);
+                        newUserEntity.LastName = StringByteConverter.ConvertStringToByte(inUser.LastName);
+                        newUserEntity.Phone = StringByteConverter.ConvertStringToByte(inUser.Phone);
+                        newUserEntity.Country = StringByteConverter.ConvertStringToByte(inUser.Country);
+                        newUserEntity.Address = StringByteConverter.ConvertStringToByte(inUser.Address);
+                        newUserEntity.City = StringByteConverter.ConvertStringToByte(inUser.City);
+                        newUserEntity.Zip = StringByteConverter.ConvertStringToByte(inUser.ZIP);
 
                         me.entities.Add(newUserEntity);
                         me.SaveChanges();
@@ -77,11 +82,11 @@ namespace MekashronTest.DAL
                         if (newUserEntity.entityID > 0)
                         {
                             users newUser = new users();
-                            newUser.Email = StringByteConverter.ConvertStringToByte(RegUser.eMail);
-                            newUser.FirstName = StringByteConverter.ConvertStringToByte(RegUser.FirstName);
-                            newUser.LastName = StringByteConverter.ConvertStringToByte(RegUser.LastName);
-                            newUser.Phone = StringByteConverter.ConvertStringToByte(RegUser.Phone);
-                            newUser.password = StringByteConverter.ConvertStringToByte(HashPassword.GetMd5Hash(RegUser.Password));
+                            newUser.Email = StringByteConverter.ConvertStringToByte(inUser.eMail);
+                            newUser.FirstName = StringByteConverter.ConvertStringToByte(inUser.FirstName);
+                            newUser.LastName = StringByteConverter.ConvertStringToByte(inUser.LastName);
+                            newUser.Phone = StringByteConverter.ConvertStringToByte(inUser.Phone);
+                            newUser.password = StringByteConverter.ConvertStringToByte(HashPassword.GetMd5Hash(inUser.Password));
                             newUser.EntityID = newUserEntity.entityID;
 
                             me.users.Add(newUser);
@@ -117,9 +122,9 @@ namespace MekashronTest.DAL
             return result;
         }
 
-        public users GetUser(string inEMail, ErrorList errors)
+        public UserModel GetUser(string inEMail, ErrorList errors)
         {
-            users result = null;
+            UserModel result = null;
 
             using (mekashrontvEntities me = new mekashrontvEntities())
             {
@@ -130,7 +135,20 @@ namespace MekashronTest.DAL
                     var query = me.users.Where(a => a.Email.Equals(inEmailByteArray));
                     if (query.Any())
                     {
-                        result = query.First();
+                        users firstUser = query.First();
+                        var querye = me.entities.Where(a => a.entityID ==firstUser.EntityID);
+                        if (querye.Any())
+                        {
+                            entities firstEntity = querye.First();
+
+                            result = new UserModel(StringByteConverter.ConvertByteArrayToString(firstUser.Email), StringByteConverter.ConvertByteArrayToString(firstUser.FirstName),
+                                StringByteConverter.ConvertByteArrayToString(firstUser.LastName), StringByteConverter.ConvertByteArrayToString(firstUser.Phone),
+                                StringByteConverter.ConvertByteArrayToString(firstEntity.Country), StringByteConverter.ConvertByteArrayToString(firstUser.password),
+                                StringByteConverter.ConvertByteArrayToString(firstEntity.Address), StringByteConverter.ConvertByteArrayToString(firstEntity.City),
+                                StringByteConverter.ConvertByteArrayToString(firstEntity.Zip), "", firstEntity.AllowEmail==3);
+
+                        }
+ 
                     }
                     else
                     {

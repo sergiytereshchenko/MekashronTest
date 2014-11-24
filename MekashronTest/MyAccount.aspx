@@ -13,25 +13,14 @@
 
 <body>
     <div class="centred">
-        <form id="form2" runat="server">
-            <div id="successReg" visible="False" class="centred" runat="server">
-                <div class="email_verification">
-                    <p>Регистрация успешно завершена! Добро пожаловать в Smart-HD. - <strong>Необходимо подтверждение E-mail адреса.</strong></p>
-                    <p>
-                        Проверьте почтовый ящик для активации Вашего аккаунта. Если Вы не получили e-mail в течении нескольких минут - проверьте ящик для спама или
-                        <asp:LinkButton ID="lkEmail" myCustomID="" runat="server" OnClientClick="return false;">нажмите здесь</asp:LinkButton>
-                        и мы вышлем код еще раз на <strong id="strongEmail" runat="server"></strong>
-                        (<a href="/MyAccount.aspx">редактировать</a>)
-                    </p>
-                    <%--<a href="javascript:__doPostBack('ctl00$lkEmail','')" id="lkEmail">нажмите здесь</a>--%>
-                </div>
-            </div>
-
+        
             <div id="errorDiv" visible="False" class="centred" runat="server">
                 <div class="error_message">
                     <p id="errorMsg" runat="server"></p>
                 </div>
             </div>
+
+        <form id="form2" runat="server">
 
             <div class="top_line">
                 <div class="centred">
@@ -51,7 +40,15 @@
                     <span>Email:</span>
                     <input id="txtEmail" class="field" type="text" runat="server" />
                     <p>Данный E-mail будет использоваться для авторизации.</p>
-                    <br />
+                    <br/>
+					<span>Имя и Фамилия:</span>
+					<input id="txtFirstLastname" class="field" type="text" runat="server" />
+					<p>Введите пожалуйста ваше действительное Имя и Фамилию.</p>
+					<br/>
+					<span>Телефон:</span>
+					<input id="txtPhone" class="field" type="text" runat="server" />
+					<p>Укажите ваш действующий номер телефона.</p>
+					<br/>
                     <span>Новый пароль:</span>
                     <input id="txtPassword1" class="field" type="password" runat="server" />
                     <p>Введите пароль для защиты вашего аккаунта.</p>
@@ -93,6 +90,7 @@
                 </div>
             </div>
             <asp:RequiredFieldValidator ID="RequiredFieldValidatorEmail" runat="server" ControlToValidate="txtEmail" Display="None" ErrorMessage="Please, enter e-mail"></asp:RequiredFieldValidator>
+            <asp:RequiredFieldValidator ID="RequiredFieldValidatorFirstLastname" runat="server" ControlToValidate="txtFirstLastname" ErrorMessage="Please, enter Name" Display="None"></asp:RequiredFieldValidator>
 
             <asp:RequiredFieldValidator ID="RequiredFieldValidatorPassword1" runat="server" ControlToValidate="txtPassword1" Display="None" ErrorMessage="Please, enter password"></asp:RequiredFieldValidator>
             <asp:RequiredFieldValidator ID="RequiredFieldValidatorPassword2" runat="server" ControlToValidate="txtPassword2" Display="None" ErrorMessage="Please, confirm password"></asp:RequiredFieldValidator>

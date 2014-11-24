@@ -6,6 +6,7 @@ using System.Text;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using MekashronTest.DAL;
 using MekashronTest.Helpers;
 
 namespace MekashronTest
@@ -23,16 +24,18 @@ namespace MekashronTest
                 RegUser.City = Request.Form["txtCity"];
                 RegUser.ZIP = Request.Form["txtZip"];
                 RegUser.Country = Request.Form["selCountry"];
+                RegUser.NotActivated = true;
 
-                //DAL.DAL dl = new DAL.DAL();
                 ErrorList errors = new ErrorList();
+                UserModel newUser = new UserModel(RegUser.eMail, RegUser.FirstName, RegUser.LastName, 
+                    RegUser.Phone, RegUser.Country, RegUser.Password, RegUser.Address, RegUser.City,
+                    RegUser.ZIP, RegUser.promo, RegUser.NotActivated);
 
-                DAL.DAL.CommonDal.InsertUser(errors);
+                DAL.DAL.CommonDal.InsertUser(newUser, (errors));
 
                 if (errors.isEmpty())
                 {
-                    RegUser.NotActivated = true;
-
+                    
                     try
                     {
                         using (MailMessage newMessage = new MailMessage())
