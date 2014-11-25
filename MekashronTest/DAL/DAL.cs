@@ -18,11 +18,11 @@ namespace MekashronTest.DAL
 
     public class DAL
     {
-        // public static DAL CommonDal = new DAL();
-
-
         private static volatile DAL commonDal;
         private static object syncRoot = new Object();
+
+        public const int ACTIVATED_USER = 3;
+        public const long EMPTY_ID = 0;
 
         private DAL() { }
 
@@ -42,9 +42,9 @@ namespace MekashronTest.DAL
             }
         }
 
-        public bool InsertUser(UserModel inUser, ErrorList errors)
+        public long InsertUser(UserModel inUser, ErrorList errors)
         {
-            bool result = true;
+            long result = EMPTY_ID;
 
             //TO DO
            //3. Check format of email and other inputs
@@ -52,7 +52,7 @@ namespace MekashronTest.DAL
             if (inUser == null)
             {
                 errors.Add("User is empty!");
-                return false;
+                return EMPTY_ID;
             }
 
             mekashrontvEntities me = new mekashrontvEntities();
@@ -79,7 +79,7 @@ namespace MekashronTest.DAL
                         me.entities.Add(newUserEntity);
                         me.SaveChanges();
 
-                        if (newUserEntity.entityID > 0)
+                        if (newUserEntity.entityID > EMPTY_ID)
                         {
                             users newUser = new users();
                             newUser.Email = StringByteConverter.ConvertStringToByte(inUser.eMail);
@@ -93,6 +93,7 @@ namespace MekashronTest.DAL
                             me.SaveChanges();
 
                             transaction.Complete();
+                            result = newUser.userID;
                             success = true;
                         }
                         
@@ -106,7 +107,7 @@ namespace MekashronTest.DAL
                 catch (Exception ex)
                 {
                     errors.Add(ex.Message);
-                    result = false;
+                    result = EMPTY_ID;
                 }
 
             }
@@ -145,8 +146,7 @@ namespace MekashronTest.DAL
                                 StringByteConverter.ConvertByteArrayToString(firstUser.LastName), StringByteConverter.ConvertByteArrayToString(firstUser.Phone),
                                 StringByteConverter.ConvertByteArrayToString(firstEntity.Country), StringByteConverter.ConvertByteArrayToString(firstUser.password),
                                 StringByteConverter.ConvertByteArrayToString(firstEntity.Address), StringByteConverter.ConvertByteArrayToString(firstEntity.City),
-                                StringByteConverter.ConvertByteArrayToString(firstEntity.Zip), "", firstEntity.AllowEmail==3);
-
+                                StringByteConverter.ConvertByteArrayToString(firstEntity.Zip), "", firstEntity.AllowEmail==DAL.ACTIVATED_USER);
                         }
  
                     }
@@ -164,9 +164,84 @@ namespace MekashronTest.DAL
             return result;
         }
 
-        public CheckResults CheckCredentials(string inEMail, string inPassword, ErrorList errors)
+        public bool UpdateUser(long inId, UserModel inUser, ErrorList errors)
+        {
+            bool result = false;
+
+            if (inUser == null)
+            {
+                errors.Add("User is empty!");
+                return false;
+            }
+
+            mekashrontvEntities me = new mekashrontvEntities();
+
+            using (TransactionScope transaction = new TransactionScope())
+            {
+
+                    try
+                    {
+                        var query = me.users.Where(a => a.userID == inId);
+                        if (query.Any())
+                        {
+                            users firstUser = query.First();
+                            var queryE = me.entities.Where(a => a.entityID == firstUser.EntityID);
+                            if (queryE.Any())
+                            {
+                                entities firstEntity = queryE.First();
+
+                                firstEntity.Email = StringByteConverter.ConvertStringToByte(inUser.eMail);
+                                firstEntity.FirstName = StringByteConverter.ConvertStringToByte(inUser.FirstName);
+                                firstEntity.LastName = StringByteConverter.ConvertStringToByte(inUser.LastName);
+                                firstEntity.Phone = StringByteConverter.ConvertStringToByte(inUser.Phone);
+                                firstEntity.Country = StringByteConverter.ConvertStringToByte(inUser.Country);
+                                firstEntity.Address = StringByteConverter.ConvertStringToByte(inUser.Address);
+                                firstEntity.City = StringByteConverter.ConvertStringToByte(inUser.City);
+                                firstEntity.Zip = StringByteConverter.ConvertStringToByte(inUser.ZIP);
+
+                                firstUser.Email = StringByteConverter.ConvertStringToByte(inUser.eMail);
+                                firstUser.FirstName = StringByteConverter.ConvertStringToByte(inUser.FirstName);
+                                firstUser.LastName = StringByteConverter.ConvertStringToByte(inUser.LastName);
+                                firstUser.Phone = StringByteConverter.ConvertStringToByte(inUser.Phone);
+                                firstUser.password = StringByteConverter.ConvertStringToByte(HashPassword.GetMd5Hash(inUser.Password));
+
+                                me.SaveChanges();
+                                transaction.Complete();
+                                result = true;
+                            }
+                            else
+                            {
+                                errors.Add("Entity ID is wrong!");
+                            }
+
+                        }
+                        else
+                        {
+                            errors.Add("User ID is wrong!");
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        errors.Add(ex.Message);
+                    }
+                }
+
+            if (!result)
+            {
+                errors.Add("Failed to update the user.");
+            }
+
+            // Dispose the object context.
+            me.Dispose();
+
+            return result;
+        }
+
+
+        public CheckResults CheckCredentials(string inEMail, string inPassword, out long userId, ErrorList errors)
         {
             CheckResults result = CheckResults.Error;
+            userId = EMPTY_ID;
 
             using (mekashrontvEntities me = new mekashrontvEntities())
             {
@@ -181,14 +256,14 @@ namespace MekashronTest.DAL
                         var firstRecord = query.First();
                         if (HashPassword.VerifyMd5Hash(inPassword, StringByteConverter.ConvertByteArrayToString(firstRecord.password)))
                         {
-                            result = CheckResults.AllRight;
+                            userId = firstRecord.userID;
 
                             //check activation
                             var querya = me.entities.Where(a => a.entityID == firstRecord.EntityID);
                             if (querya.Any())
                             {
                                 var firstRecorda = querya.First();
-                                if (firstRecorda.AllowEmail == 3)
+                                if (firstRecorda.AllowEmail == DAL.ACTIVATED_USER)
                                 {
                                     result = CheckResults.AllRight;
                                 }
@@ -238,9 +313,9 @@ namespace MekashronTest.DAL
                         if (querya.Any())
                         {
                             var firstRecorda = querya.First();
-                            if (firstRecorda.AllowEmail != 3)
+                            if (firstRecorda.AllowEmail != DAL.ACTIVATED_USER)
                             {
-                                firstRecorda.AllowEmail=3;
+                                firstRecorda.AllowEmail = DAL.ACTIVATED_USER;
                                 me.SaveChanges();
                                 result = true;
                             }
@@ -290,6 +365,75 @@ namespace MekashronTest.DAL
 
             return result;
         }
+
+
+        public bool ChangeEmail(long inId, string inEmail, ErrorList errors)
+        {
+            bool result = false;
+
+            if (inId <= 0)
+            {
+                errors.Add("ID is empty!");
+                return false;
+            }
+            if (String.IsNullOrEmpty(inEmail))
+            {
+                errors.Add("e-Mail is empty!");
+                return false;
+            }
+
+            mekashrontvEntities me = new mekashrontvEntities();
+
+            using (TransactionScope transaction = new TransactionScope())
+            {
+
+                try
+                {
+                    var query = me.users.Where(a => a.userID == inId);
+                    if (query.Any())
+                    {
+                        users firstUser = query.First();
+                        var queryE = me.entities.Where(a => a.entityID == firstUser.EntityID);
+                        if (queryE.Any())
+                        {
+                            entities firstEntity = queryE.First();
+
+                            firstEntity.Email = StringByteConverter.ConvertStringToByte(inEmail);
+
+                            firstUser.Email = StringByteConverter.ConvertStringToByte(inEmail);
+
+                            me.SaveChanges();
+                            transaction.Complete();
+                            result = true;
+                        }
+                        else
+                        {
+                            errors.Add("Entity ID is wrong!");
+                        }
+
+                    }
+                    else
+                    {
+                        errors.Add("User ID is wrong!");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    errors.Add(ex.Message);
+                }
+            }
+
+            if (!result)
+            {
+                errors.Add("Failed to change the user's eMail.");
+            }
+
+            // Dispose the object context.
+            me.Dispose();
+
+            return result;
+        }
+
 
         public bool IsEmailAlreadyInDB(string inEMail)
         {

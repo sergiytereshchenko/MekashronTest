@@ -7,6 +7,8 @@ namespace MekashronTest
 {
     public static class RegUser
     {
+        public static long UserID { get; set; }
+
         public static string eMail { get; set; }
 
         public static string FirstName { get; set; }
@@ -31,6 +33,7 @@ namespace MekashronTest
 
         public static void Clear()
         {
+            UserID = 0;
             eMail = "";
             FirstName = "";
             LastName = "";

@@ -31,10 +31,11 @@ namespace MekashronTest
                     RegUser.Phone, RegUser.Country, RegUser.Password, RegUser.Address, RegUser.City,
                     RegUser.ZIP, RegUser.promo, RegUser.NotActivated);
 
-                DAL.DAL.CommonDal.InsertUser(newUser, (errors));
+                long id = DAL.DAL.CommonDal.InsertUser(newUser, (errors));
 
-                if (errors.isEmpty())
+                if (id > DAL.DAL.EMPTY_ID)
                 {
+                    RegUser.UserID = id;
                     
                     try
                     {
@@ -53,6 +54,10 @@ namespace MekashronTest
                         errors.Add(ex.Message);
                     }
                     
+                }
+                else
+                {
+                    errors.Add("Adding a new user failed");
                 }
 
                 if (!errors.isEmpty())

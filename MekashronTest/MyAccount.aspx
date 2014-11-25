@@ -41,7 +41,7 @@
                     <input id="txtEmail" class="field" type="text" runat="server" />
                     <p>Данный E-mail будет использоваться для авторизации.</p>
                     <br/>
-					<span>Имя и Фамилия:</span>
+                    <%--					<span>Имя и Фамилия:</span>
 					<input id="txtFirstLastname" class="field" type="text" runat="server" />
 					<p>Введите пожалуйста ваше действительное Имя и Фамилию.</p>
 					<br/>
@@ -79,18 +79,25 @@
                     </div>
                     <p>Выберите страну в которой вы проживаете.</p>
                     <%--</form>--%>
-                </div>
+                </div>--%>
             </div>
             <br />
 
             <br />
             <div class="register">
                 <div class="form without">
-                    <asp:Button ID="btnReg2" runat="server" CssClass="orange_button" Text="Изменить аккаунт" />
+                    <asp:Button ID="btnChange" runat="server" CssClass="orange_button" Text="Изменить" OnClick="btnChange_Click" />
+                    
+	                <div id="Div1" Visible="True" class="centred" runat="server">
+	                    <asp:ValidationSummary ID="ValidationSummaryReg2" runat="server" BorderStyle="Solid" BackColor="#FFCCCC" BorderColor="#CC3300" BorderWidth="1px" DisplayMode="List" style="top: 0px; left: 0px; width: 414px" />
+	                </div>
+
                 </div>
             </div>
             <asp:RequiredFieldValidator ID="RequiredFieldValidatorEmail" runat="server" ControlToValidate="txtEmail" Display="None" ErrorMessage="Please, enter e-mail"></asp:RequiredFieldValidator>
-            <asp:RequiredFieldValidator ID="RequiredFieldValidatorFirstLastname" runat="server" ControlToValidate="txtFirstLastname" ErrorMessage="Please, enter Name" Display="None"></asp:RequiredFieldValidator>
+            <asp:RegularExpressionValidator ID="RegularExpressionValidatorEmail" runat="server" ControlToValidate="txtEmail" Display="None" ErrorMessage="Please, enter e-mail" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"></asp:RegularExpressionValidator>
+
+<%--            <asp:RequiredFieldValidator ID="RequiredFieldValidatorFirstLastname" runat="server" ControlToValidate="txtFirstLastname" ErrorMessage="Please, enter Name" Display="None"></asp:RequiredFieldValidator>
 
             <asp:RequiredFieldValidator ID="RequiredFieldValidatorPassword1" runat="server" ControlToValidate="txtPassword1" Display="None" ErrorMessage="Please, enter password"></asp:RequiredFieldValidator>
             <asp:RequiredFieldValidator ID="RequiredFieldValidatorPassword2" runat="server" ControlToValidate="txtPassword2" Display="None" ErrorMessage="Please, confirm password"></asp:RequiredFieldValidator>
@@ -102,11 +109,8 @@
 
             <asp:RequiredFieldValidator ID="RequiredFieldValidatorZIP" runat="server" ControlToValidate="txtZip" ErrorMessage="Please, enter zip" Display="None"></asp:RequiredFieldValidator>
 
-            <asp:RequiredFieldValidator ID="RequiredFieldValidatorCountry" runat="server" ControlToValidate="selCountry" ErrorMessage="Please, enter country" Display="None" InitialValue="---"></asp:RequiredFieldValidator>
+            <asp:RequiredFieldValidator ID="RequiredFieldValidatorCountry" runat="server" ControlToValidate="selCountry" ErrorMessage="Please, enter country" Display="None" InitialValue="---"></asp:RequiredFieldValidator>--%>
 
-	        <div Visible="True" class="centred" runat="server">
-	            <asp:ValidationSummary ID="ValidationSummaryReg2" runat="server" BorderStyle="Solid" BackColor="#FFCCCC" BorderColor="#CC3300" BorderWidth="1px" DisplayMode="List" style="top: 0px; left: 0px; width: 414px" />
-	        </div>
 
 
         </form>
@@ -133,10 +137,5 @@
         <p class="copyright">Smart-HD © 2014 Все права защищены.</p>
     </div>
 
-    <%--   <form id="form1" runat="server">
-    <div>
-    
-    </div>
-    </form>--%>
 </body>
 </html>

@@ -67,13 +67,15 @@ namespace MekashronTest
                 string inEmail = Request.Form["txtEmail"];
                 string inPassword = Request.Form["txtPassword"];
                 ErrorList errors = new ErrorList();
+                long userID;
 
-                DAL.CheckResults checkresult = DAL.DAL.CommonDal.CheckCredentials(inEmail, inPassword, errors);
+                DAL.CheckResults checkresult = DAL.DAL.CommonDal.CheckCredentials(inEmail, inPassword, out userID, errors);
 
                 if (checkresult == DAL.CheckResults.AllRight || checkresult == DAL.CheckResults.NotActivated)
                 {
                     RegUser.eMail = inEmail;
                     RegUser.Password = inPassword;
+                    RegUser.UserID = userID;
                 }
 
                 if (checkresult == DAL.CheckResults.AllRight)
@@ -105,13 +107,15 @@ namespace MekashronTest
                     string inEmail = Request.Cookies["eMail"].Value;
                     string inPassword = Request.Cookies["Password"].Value;
                     ErrorList errors = new ErrorList();
+                    long userID;
 
-                    DAL.CheckResults checkresult = DAL.DAL.CommonDal.CheckCredentials(inEmail, inPassword, errors);
+                    DAL.CheckResults checkresult = DAL.DAL.CommonDal.CheckCredentials(inEmail, inPassword, out userID, errors);
 
                     if (checkresult == DAL.CheckResults.AllRight || checkresult == DAL.CheckResults.NotActivated)
                     {
                         RegUser.eMail = inEmail;
                         RegUser.Password = inPassword;
+                        RegUser.UserID = userID;
                     }
 
                     if (checkresult == DAL.CheckResults.AllRight)
