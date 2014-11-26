@@ -56,7 +56,6 @@ namespace MekashronTest.DAL
             }
 
             mekashrontvEntities me = new mekashrontvEntities();
-            bool success = false;
 
             using (TransactionScope transaction = new TransactionScope())
             {
@@ -94,7 +93,6 @@ namespace MekashronTest.DAL
 
                             transaction.Complete();
                             result = newUser.userID;
-                            success = true;
                         }
                         
                     }
@@ -110,11 +108,6 @@ namespace MekashronTest.DAL
                     result = EMPTY_ID;
                 }
 
-            }
-
-            if (!success)
-            {
-                errors.Add("Failed to add a new user.");
             }
 
             // Dispose the object context.

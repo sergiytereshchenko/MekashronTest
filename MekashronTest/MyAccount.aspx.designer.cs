@@ -67,13 +67,13 @@ namespace MekashronTest {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl Div1;
         
         /// <summary>
-        /// ValidationSummaryReg2 control.
+        /// ValidationSummaryIndex control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ValidationSummary ValidationSummaryReg2;
+        protected global::System.Web.UI.WebControls.ValidationSummary ValidationSummaryIndex;
         
         /// <summary>
         /// RequiredFieldValidatorEmail control.

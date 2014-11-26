@@ -95,14 +95,17 @@
                 </div>
 
                 <input class="button" type="submit" value="Войти" runat="server" />
+                
+                    <div id="Div1" visible="True" class="centred, register"   runat="server">
+                        <asp:ValidationSummary CssClass="validation_message" ID="ValidationSummaryIndex" runat="server" DisplayMode="BulletList" />
+                    </div>
+
+
                 <asp:RequiredFieldValidator ID="RequiredFieldValidatorEmail" runat="server" ControlToValidate="txtEmail" Display="None" ErrorMessage="Please, enter e-mail"></asp:RequiredFieldValidator>
-                <asp:RegularExpressionValidator ID="RegularExpressionValidatorEmail" runat="server" ControlToValidate="txtEmail" Display="None" ErrorMessage="Please, enter e-mail" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"></asp:RegularExpressionValidator>
+                <asp:RegularExpressionValidator ID="RegularExpressionValidatorEmail" runat="server" ControlToValidate="txtEmail" Display="None" ErrorMessage="Please, enter valid e-mail" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"></asp:RegularExpressionValidator>
 
                 <asp:RequiredFieldValidator ID="RequiredFieldValidatorPassword" runat="server" ControlToValidate="txtPassword" ErrorMessage="Please, enter password" Display="None"></asp:RequiredFieldValidator>
 
-                <div visible="True" class="centred" runat="server">
-                    <asp:ValidationSummary ID="ValidationSummaryIndex" runat="server" BorderStyle="Solid" BackColor="#FFCCCC" BorderColor="#CC3300" BorderWidth="1px" DisplayMode="List" Style="top: 0px; left: 0px; width: 414px" />
-                </div>
 
             </div>
         </form>

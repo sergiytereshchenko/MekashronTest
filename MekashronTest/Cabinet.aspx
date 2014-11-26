@@ -41,7 +41,7 @@
 				    <br/>
                     <br/>
                     <br/>
-				    <asp:LinkButton ID="LinkButtonToAccount" runat="server" CssClass="orange_button" PostBackUrl="~/MyAccount.aspx">My account</asp:LinkButton>
+<%--				    <asp:LinkButton ID="LinkButtonToAccount" runat="server" CssClass="orange_button" PostBackUrl="~/MyAccount.aspx">My account</asp:LinkButton>--%>
 <%--					<span>E-mail:</span>
 			 		<input id="txtEmail" required class="field" type="text" runat="server" />
 					<p>На вашу электронную почту будет  выслана ссылка для подтверждения регистрации.</p>

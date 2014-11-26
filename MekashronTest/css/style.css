@@ -444,6 +444,22 @@ span.required {
 	text-decoration: underline;
 	}
 
+/**********VALIDATION****************/
+
+.validation_message {
+	width: 388px;
+    background: #ffcccc;
+	font-size: 14px;
+    padding: 10px 10px;
+	margin: 20px 1px 1px 1px;
+    border: 1px solid #cc3300;
+	border-radius: 5px; /* CSS3 */
+	-moz-border-radius: 5px; /* Firefox */
+	-webkit-border-radius: 5px; /* Safari, Chrome */
+	-khtml-border-radius: 5px; /* KHTML */
+	text-indent: 15px;
+	}	
+
 	
 /***********REGISTER*************/
 

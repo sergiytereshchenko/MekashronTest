@@ -100,6 +100,10 @@
                     <%--<form id="form4" runat="server">--%>
                     <%--<input class="orange_button" type="submit" value="Создать аккаунт" />--%>
                     <asp:Button ID="btnReg2" runat="server" CssClass="orange_button" Text="Создать аккаунт" />
+                    <div id="Div1" visible="True" class="centred" runat="server">
+                        <asp:ValidationSummary CssClass="validation_message" ID="ValidationSummaryIndex" runat="server" DisplayMode="BulletList" />
+                    </div>
+
                     <%--</form>--%>
                 </div>
             </div>
@@ -115,9 +119,6 @@
 
             <asp:RequiredFieldValidator ID="RequiredFieldValidatorCountry" runat="server" ControlToValidate="selCountry" ErrorMessage="Please, enter country" Display="None" InitialValue="---"></asp:RequiredFieldValidator>
 
-	        <div Visible="True" class="centred" runat="server">
-	            <asp:ValidationSummary ID="ValidationSummaryReg2" runat="server" BorderStyle="Solid" BackColor="#FFCCCC" BorderColor="#CC3300" BorderWidth="1px" DisplayMode="List" style="top: 0px; left: 0px; width: 414px" />
-	        </div>
             
 
         </form>

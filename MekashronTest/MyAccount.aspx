@@ -36,50 +36,13 @@
 
             <div class="register">
                 <div class="form">
-                    <%--<form id="form1" runat="server">--%>
+
                     <span>Email:</span>
                     <input id="txtEmail" class="field" type="text" runat="server" />
                     <p>Данный E-mail будет использоваться для авторизации.</p>
                     <br/>
-                    <%--					<span>Имя и Фамилия:</span>
-					<input id="txtFirstLastname" class="field" type="text" runat="server" />
-					<p>Введите пожалуйста ваше действительное Имя и Фамилию.</p>
-					<br/>
-					<span>Телефон:</span>
-					<input id="txtPhone" class="field" type="text" runat="server" />
-					<p>Укажите ваш действующий номер телефона.</p>
-					<br/>
-                    <span>Новый пароль:</span>
-                    <input id="txtPassword1" class="field" type="password" runat="server" />
-                    <p>Введите пароль для защиты вашего аккаунта.</p>
-                    <br />
-                    <span>Подтвердите пароль:</span>
-                    <input id="txtPassword2" class="field" type="password" runat="server" />
-                    <p>Подтвердите ваш пароль.</p>
-                    <span>Адрес:</span>
-                    <input id="txtAddress" class="field" type="text" runat="server" />
-                    <p>Укажите ваш действительный адрес.</p>
-                    <br />
-                    <span>Город:</span>
-                    <input id="txtCity" class="field" type="text" runat="server" />
-                    <p>Город в котором вы проживаете.</p>
-                    <br />
-                    <span>Почтовый индекс:</span>
-                    <input id="txtZip" class="field" type="text" runat="server" />
-                    <p>Ваш почтовый индекс.</p>
-                    <br />
-                    <span>Страна:</span>
-                    <div class="select">
-                        <select id="selCountry" runat="server">
-                            <option>---</option>
-                            <option>Israel</option>
-                            <option>Ukraine</option>
-                            <option>USA</option>
-                        </select>
-                    </div>
-                    <p>Выберите страну в которой вы проживаете.</p>
-                    <%--</form>--%>
-                </div>--%>
+
+                </div>
             </div>
             <br />
 
@@ -88,30 +51,14 @@
                 <div class="form without">
                     <asp:Button ID="btnChange" runat="server" CssClass="orange_button" Text="Изменить" OnClick="btnChange_Click" />
                     
-	                <div id="Div1" Visible="True" class="centred" runat="server">
-	                    <asp:ValidationSummary ID="ValidationSummaryReg2" runat="server" BorderStyle="Solid" BackColor="#FFCCCC" BorderColor="#CC3300" BorderWidth="1px" DisplayMode="List" style="top: 0px; left: 0px; width: 414px" />
-	                </div>
+                    <div id="Div1" visible="True" class="centred"   runat="server">
+                        <asp:ValidationSummary CssClass="validation_message" ID="ValidationSummaryIndex" runat="server" DisplayMode="BulletList" />
+                    </div>
 
                 </div>
             </div>
             <asp:RequiredFieldValidator ID="RequiredFieldValidatorEmail" runat="server" ControlToValidate="txtEmail" Display="None" ErrorMessage="Please, enter e-mail"></asp:RequiredFieldValidator>
-            <asp:RegularExpressionValidator ID="RegularExpressionValidatorEmail" runat="server" ControlToValidate="txtEmail" Display="None" ErrorMessage="Please, enter e-mail" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"></asp:RegularExpressionValidator>
-
-<%--            <asp:RequiredFieldValidator ID="RequiredFieldValidatorFirstLastname" runat="server" ControlToValidate="txtFirstLastname" ErrorMessage="Please, enter Name" Display="None"></asp:RequiredFieldValidator>
-
-            <asp:RequiredFieldValidator ID="RequiredFieldValidatorPassword1" runat="server" ControlToValidate="txtPassword1" Display="None" ErrorMessage="Please, enter password"></asp:RequiredFieldValidator>
-            <asp:RequiredFieldValidator ID="RequiredFieldValidatorPassword2" runat="server" ControlToValidate="txtPassword2" Display="None" ErrorMessage="Please, confirm password"></asp:RequiredFieldValidator>
-            <asp:CompareValidator ID="CompareValidator1" runat="server" ErrorMessage="Passwords don't match" ControlToCompare="txtPassword1" ControlToValidate="txtPassword2" Display="None"></asp:CompareValidator>
-            
-            <asp:RequiredFieldValidator ID="RequiredFieldValidatorAddress" runat="server" ControlToValidate="txtAddress" ErrorMessage="Please, enter address" Display="None"></asp:RequiredFieldValidator>
-
-            <asp:RequiredFieldValidator ID="RequiredFieldValidatorCity" runat="server" ControlToValidate="txtCity" ErrorMessage="Please, enter city" Display="None"></asp:RequiredFieldValidator>
-
-            <asp:RequiredFieldValidator ID="RequiredFieldValidatorZIP" runat="server" ControlToValidate="txtZip" ErrorMessage="Please, enter zip" Display="None"></asp:RequiredFieldValidator>
-
-            <asp:RequiredFieldValidator ID="RequiredFieldValidatorCountry" runat="server" ControlToValidate="selCountry" ErrorMessage="Please, enter country" Display="None" InitialValue="---"></asp:RequiredFieldValidator>--%>
-
-
+            <asp:RegularExpressionValidator ID="RegularExpressionValidatorEmail" runat="server" ControlToValidate="txtEmail" Display="None" ErrorMessage="Please, enter valid e-mail" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"></asp:RegularExpressionValidator>
 
         </form>
 

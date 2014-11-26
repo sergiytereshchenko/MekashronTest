@@ -46,12 +46,13 @@
 					
 					<br/>
 					<asp:RequiredFieldValidator ID="RequiredFieldValidatorEmail" runat="server" ErrorMessage="Please, input e-mail" Display="None" ControlToValidate="txtEmail"></asp:RequiredFieldValidator>
-                    <asp:RegularExpressionValidator ID="RegularExpressionValidatorEmail" runat="server" ErrorMessage="Please, input proper e-mail" ControlToValidate="txtEmail" Display="None" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"></asp:RegularExpressionValidator>
+                    <asp:RegularExpressionValidator ID="RegularExpressionValidatorEmail" runat="server" ErrorMessage="Please, input valid e-mail" ControlToValidate="txtEmail" Display="None" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"></asp:RegularExpressionValidator>
 					<br/>
 					<br/>
                     <asp:Button CssClass="orange_button" ID="btnSendEmail" runat="server" Text="Выслать новый пароль" OnClick="btnSendEmail_Click" />
-                    <asp:ValidationSummary ID="ValidationSummaryForgotPassword" runat="server" />
-					<%--<input class="orange_button" type="submit" value="Выслать новый пароль" />--%>
+                    <div id="Div1" visible="True" class="centred"   runat="server">
+                        <asp:ValidationSummary CssClass="validation_message" ID="ValidationSummaryIndex" runat="server" DisplayMode="BulletList" />
+                    </div>
 				</form>
 			</div>
 		</div>
